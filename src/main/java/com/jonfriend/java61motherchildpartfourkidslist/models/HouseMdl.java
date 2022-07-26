@@ -10,8 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn; // JRF manually adding
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
@@ -23,8 +22,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 //import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="twinone")
-public class TwinoneMdl {
+@Table(name="house")
+public class HouseMdl {
     
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,49 +36,25 @@ public class TwinoneMdl {
 	private Date updatedAt;
 
 	// begin: entity-specific table fields
-	private String twinoneName;
-    
-	private String twinoneDesc;
-	
-	private float twinoneFloat; 
-	
-	private Integer twinoneInt; 
-	
-	private String twinoneLookup; 
-	
-//	@Future
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date twinoneDate;
+	private String houseName;
     
     // end: entity-specific table fields
     
     // start: code for joins
-    
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "twintwo_twinone", 
-        joinColumns = @JoinColumn(name = "twinone_id"), 
-        inverseJoinColumns = @JoinColumn(name = "twintwo_id")
-    )
-    private List<TwintwoMdl> twintwoMdl;
+
+	// join twinone
+    @OneToMany(mappedBy="houseMdl", fetch = FetchType.LAZY)
+    private List<TwinoneMdl> twinoneList; 
     
     // join user table
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="createdby_id")
 	private UserMdl userMdl;  
 	
-	// join house table
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="house_id")
-	private HouseMdl houseMdl;
-	
-    // join onetwinchild table
-    @OneToMany(mappedBy="twinoneMdl", fetch = FetchType.LAZY)
-    private List<OnetwinchildMdl> onetwinchildList; 
-	
+    // end: code for joins
 	
     // instantiate the model: 
-    public TwinoneMdl() {}
+    public HouseMdl() {}
     
     // add methods to populate maintain createdAt/UpdatedAt
     @PrePersist
@@ -89,9 +64,9 @@ public class TwinoneMdl {
     @PreUpdate
     protected void onUpdate(){
         this.updatedAt = new Date();
-        // begin: getters and setters
     }
 
+    // begin: getters and setters
 	public Long getId() {
 		return id;
 	}
@@ -116,60 +91,20 @@ public class TwinoneMdl {
 		this.updatedAt = updatedAt;
 	}
 
-	public String getTwinoneName() {
-		return twinoneName;
+	public String getHouseName() {
+		return houseName;
 	}
 
-	public void setTwinoneName(String twinoneName) {
-		this.twinoneName = twinoneName;
+	public void setHouseName(String houseName) {
+		this.houseName = houseName;
 	}
 
-	public String getTwinoneDesc() {
-		return twinoneDesc;
+	public List<TwinoneMdl> getTwinoneList() {
+		return twinoneList;
 	}
 
-	public void setTwinoneDesc(String twinoneDesc) {
-		this.twinoneDesc = twinoneDesc;
-	}
-
-	public float getTwinoneFloat() {
-		return twinoneFloat;
-	}
-
-	public void setTwinoneFloat(float twinoneFloat) {
-		this.twinoneFloat = twinoneFloat;
-	}
-
-	public Integer getTwinoneInt() {
-		return twinoneInt;
-	}
-
-	public void setTwinoneInt(Integer twinoneInt) {
-		this.twinoneInt = twinoneInt;
-	}
-
-	public String getTwinoneLookup() {
-		return twinoneLookup;
-	}
-
-	public void setTwinoneLookup(String twinoneLookup) {
-		this.twinoneLookup = twinoneLookup;
-	}
-
-	public Date getTwinoneDate() {
-		return twinoneDate;
-	}
-
-	public void setTwinoneDate(Date twinoneDate) {
-		this.twinoneDate = twinoneDate;
-	}
-
-	public List<TwintwoMdl> getTwintwoMdl() {
-		return twintwoMdl;
-	}
-
-	public void setTwintwoMdl(List<TwintwoMdl> twintwoMdl) {
-		this.twintwoMdl = twintwoMdl;
+	public void setTwinoneList(List<TwinoneMdl> twinoneList) {
+		this.twinoneList = twinoneList;
 	}
 
 	public UserMdl getUserMdl() {

@@ -14,7 +14,6 @@
 	<div id=main class="container-fluid">
 		<div id=form class="container-fluid">
 			<h3>Add a Twinone</h3>
-			<%-- <form:form action='/store/twinone/new' method='post' modelAttribute='twinone'> --%>
 			<form:form action='/twinone/new' method='post' modelAttribute='twinone'>
 			
 				<!-- begin: JRF trying to tie user to twinone -->

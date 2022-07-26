@@ -18,10 +18,30 @@
 			<h3>Thanks for being part of our growing community.  Let's talk more soon.</h3> 
 		</div>
 
-		
-		<!-- <div id="homeListAcross" class="container-fluid">  -->
+
 		<div id="listContainer" class="container listContainerStyle" style="width: 80rem"> 
-			<!-- <div id=twinoneList class="container-fluid"> -->
+			<div id="houseList">
+				<h3>House List</h3>
+				<a href= "/house/new"><button class="btn btn-primary">Add House</button></a>
+
+				<table class="table table-striped table-dark table-hover">
+					<thead>
+						<tr>
+							<th scope="col">id</th>
+							<th scope="col">Name</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="record" items="${houseList}">
+							<tr>
+								<td>${record.id}</td>
+								<td><a href="/house/${record.id}">${record.houseName}</a></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			
 			<div id="twinoneList">
 			
 				<h3>Twinone List</h3>
@@ -77,6 +97,7 @@
 				</table>
 			</div>
 			
+						
 			<div id="userList">
 			
 				<h3>User List</h3>

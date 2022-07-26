@@ -16,12 +16,13 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.jonfriend.java61motherchildpartfourkidslist.models.HouseMdl;
 import com.jonfriend.java61motherchildpartfourkidslist.models.LoginUserMdl;
 
 import com.jonfriend.java61motherchildpartfourkidslist.models.TwinoneMdl;
 import com.jonfriend.java61motherchildpartfourkidslist.models.TwintwoMdl;
 import com.jonfriend.java61motherchildpartfourkidslist.models.UserMdl;
-
+import com.jonfriend.java61motherchildpartfourkidslist.services.HouseSrv;
 import com.jonfriend.java61motherchildpartfourkidslist.services.TwinoneSrv;
 import com.jonfriend.java61motherchildpartfourkidslist.services.TwintwoSrv;
 import com.jonfriend.java61motherchildpartfourkidslist.services.UserSrv;
@@ -37,6 +38,9 @@ public class HomeController {
 	
 	@Autowired
 	private TwintwoSrv twintwoSrv;
+	
+	@Autowired
+	private HouseSrv houseSrv;
 	
 // ********************************************************************
 // AUTHENTICATION METHODS
@@ -152,9 +156,12 @@ public class HomeController {
 			List<TwintwoMdl> intVar4 = twintwoSrv.returnAll();
 			model.addAttribute("twintwoList", intVar4);
 			
+			List<HouseMdl> intVar5 = houseSrv.returnAll();
+			model.addAttribute("houseList", intVar5);
+			
 			// JRF 724
-			List<UserMdl> intVar5 = userSrv.returnAll();
-			model.addAttribute("userList", intVar5);
+			List<UserMdl> intVarUser = userSrv.returnAll();
+			model.addAttribute("userList", intVarUser);
 			
 			System.out.println("Page Display: home"); 
 		    return "home.jsp";  

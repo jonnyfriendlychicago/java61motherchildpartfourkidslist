@@ -18,7 +18,6 @@ public class TwinoneSrv {
 	public TwinoneSrv(TwinoneRpo twinoneRpo) {this.twinoneRpo = twinoneRpo;}
 	
 	// creates one twinone 
-//	public TwinoneMdl addTwinone(TwinoneMdl x) {
 	public TwinoneMdl create(TwinoneMdl x) {
 		return twinoneRpo.save(x);
 	}
@@ -28,8 +27,7 @@ public class TwinoneSrv {
 		return twinoneRpo.save(x);
 	}
 	
-	// delete twinone by id >> rename as delete
-//	public void deleteTwinone(TwinoneMdl x) {
+	// delete twinone by id 
 	public void delete(TwinoneMdl x) {
 		twinoneRpo.delete(x);
 	}
@@ -49,12 +47,12 @@ public class TwinoneSrv {
 		return twinoneRpo.findAll();
 	}
 	
-	// get all joined twinone 
+	// get all joined twintwo
 	public List<TwinoneMdl> getAssignedTwintwos(TwintwoMdl x){
 		return twinoneRpo.findAllByTwintwoMdl(x);
 	}
 	
-	// get all un-joined twinone 
+	// get all un-joined twintwo
 	public List<TwinoneMdl> getUnassignedTwintwos(TwintwoMdl x){
 		return twinoneRpo.findByTwintwoMdlNotContains(x);
 	}

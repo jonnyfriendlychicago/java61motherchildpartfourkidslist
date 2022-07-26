@@ -40,12 +40,13 @@ public class UserMdl {
     @Size(min=3, max=128, message="Confirm Password must be between 8 and 25 characters")
     private String confirm;
     
-    // begin: JRF trying to tie this to twinone
-    
+    // join twinone
     @OneToMany(mappedBy="userMdl", fetch = FetchType.LAZY)
     private List<TwinoneMdl> twinoneList; 
-    
-    // end: JRF trying to tie this to twinone
+
+    // join house
+    @OneToMany(mappedBy="userMdl", fetch = FetchType.LAZY)
+    private List<HouseMdl> houseList; 
     
   //**************************************************
   //**************************************************
